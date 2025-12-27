@@ -1,0 +1,46 @@
+Setup redi --- docker run -d --name redis -p 6379:6379  redis:latest
+ 
+
+Redis store all data in key value pair ---- in string 
+
+
+Redis use ram to store data 
+timw to live- how longer it will remian in redis (ttl) ----- (-1 infinite )
+
+
+127.0.0.1:6379> keys *
+1) "name"
+2) "age" value pairs
+127.0.0.1:6379> set name suryansh                                                                                                                               
+OK
+127.0.0.1:6379> set age 21
+OK
+127.0.0.1:6379> get age
+"21"
+127.0.0.1:6379> get name
+"suryansh"
+127.0.0.1:6379> exist name
+(error) ERR unknown command 'exist', with args beginning with: 'name' 
+127.0.0.1:6379> exists name
+(integer) 1
+127.0.0.1:6379> keys *
+1) "name"
+2) "age"
+127.0.0.1:6379> flushall  (delete all data )
+
+127.0.0.1:6379> expire name 20
+(integer) 0
+127.0.0.1:6379> ttl name
+(integer) -2
+127.0.0.1:6379> get name
+(nil)
+127.0.0.1:6379> set name suryansh
+OK
+127.0.0.1:6379> expire name 30
+(integer) 1
+127.0.0.1:6379> ttl name
+(integer) 27
+127.0.0.1:6379> ttl name
+(integer) 23
+127.0.0.1:6379> setex name 50 suryansh (set and expirte together)
+OK
